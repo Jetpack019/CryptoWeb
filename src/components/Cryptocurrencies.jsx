@@ -23,12 +23,14 @@ function Cryptocurrencies({simplified}) {
   console.log(cryptos);
   return (
     <>
-     <div className="search-crypto">
+   {!simplified && (
+        <div className="search-crypto">
           <Input
             placeholder="Search Cryptocurrency"
             onChange={(e) => setSearchTerm(e.target.value.toLowerCase())}
           />
         </div>
+      )}
        <Row gutter={[32, 32]} className="crypto-card-container">
         {cryptos?.map((currency) => (
           <Col

@@ -1,14 +1,17 @@
 import { configureStore } from "@reduxjs/toolkit";
-
-import {cryptoApi} from '../services/cryptoApi';
-import { setupListeners } from "@reduxjs/toolkit/dist/query";
+import { cryptoApi } from '../services/cryptoApi';
+import { cryptoNewsApi } from "../services/cryptoNewsApi";
+import { setupListeners } from "@reduxjs/toolkit/query";
 
 export const store = configureStore({
   reducer: {
-    // ... other reducers
-    [cryptoApi.reducerPath]: cryptoApi.reducer, // Add the RTK-Query reducer
+    [cryptoApi.reducerPath]: cryptoApi.reducer,
+    [cryptoNewsApi.reducerPath]: cryptoNewsApi.reducer,
   },
   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat(cryptoApi.middleware), // Add the RTK-Query middleware
+    getDefaultMiddleware()
+      .concat(cryptoApi.middleware)
+      .concat(cryptoNewsApi.middleware), 
 });
+
 setupListeners(store.dispatch);
